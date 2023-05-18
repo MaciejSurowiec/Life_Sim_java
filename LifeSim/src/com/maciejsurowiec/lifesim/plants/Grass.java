@@ -6,22 +6,24 @@ import com.maciejsurowiec.lifesim.World;
 import java.awt.Color;
 
 public class Grass extends Plant {
-
     public  static final String NAME = "a Grass";
     public static final int ID = 9;
+    public static final Color AVATAR = new Color(23, 199, 29);
 
     public Grass(Vector vec, World world) {
         this.world = world;
         position = vec;
         initiative = 0;
         strength = 0;
-        avatar = new Color(23, 199, 29);
+
         toYoung = true;
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
     }
 
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public int getId() { return ID; }
 

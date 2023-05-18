@@ -11,7 +11,8 @@ public class Antelope extends Animal {
     protected int move;
     protected int ESCAPE = 50;
     public static final int ID = 1;
-    public  static final String NAME = "an Antelope";
+    public static final String NAME = "an Antelope";
+    public static final Color AVATAR = new Color(255,255,153);
 
     public Antelope(Vector pos, World world) {
         strength = 4;
@@ -19,12 +20,13 @@ public class Antelope extends Animal {
         toYoung = true;
         this.world = world;
         position = pos;
-        avatar = new Color(255,255,153);
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
     }
 
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public void makeChild(Vector pos) {
         Antelope antelope = new Antelope(pos, world);
@@ -82,7 +84,7 @@ public class Antelope extends Animal {
     }
 
     public int collision(Organism temp) {
-        if (temp.SameSpecies(avatar)) {
+        if (temp.SameSpecies(AVATAR)) {
             if (!toYoung && !temp.isToYoung()) {
                 world.commentator.birth(this);
                 breeding();

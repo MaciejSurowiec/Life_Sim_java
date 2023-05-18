@@ -60,7 +60,7 @@ public class Commentator {
 
     public void birth(Organism newborn) {
         if (newborn.getInitiative() != 0) speak(newborn.speak() + " birth");
-        else speak("new seedling " + newborn.speak());
+        else speak("new seedling of " + newborn.speak());
     }
 
     public void escape(Organism org, Organism other) {

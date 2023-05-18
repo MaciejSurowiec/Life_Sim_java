@@ -8,9 +8,9 @@ import com.maciejsurowiec.lifesim.World;
 import java.awt.Color;
 
 public class Fox extends Animal {
-
     public  static final String NAME = "a Fox";
     public static final int ID = 3;
+    public static final Color AVATAR = new Color(255,128,0);
 
     public Fox(Vector pos, World world) {
         strength = 3;
@@ -18,12 +18,13 @@ public class Fox extends Animal {
         toYoung = true;
         this.world = world;
         position = pos;
-        avatar = new Color(255,128,0);
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
     }
 
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public int getId() { return ID; }
 

@@ -7,8 +7,8 @@ import com.maciejsurowiec.lifesim.animals.CyberSheep;
 import java.awt.Color;
 
 public class PineBorscht extends Plant {
-
     public static final String NAME = "a Pine Borscht";
+    public static final Color AVATAR = new Color(16, 73, 40);
     public static final int ID = 12;
 
     public PineBorscht(Vector vec, World world) {
@@ -16,11 +16,12 @@ public class PineBorscht extends Plant {
         position = vec;
         initiative = 0;
         strength = 10;
-        avatar = new Color(16, 73, 40);
+
         toYoung = true;
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
     }
+
 
     public void action() {
         if (toYoung) toYoung = false;
@@ -32,6 +33,8 @@ public class PineBorscht extends Plant {
     }
 
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public int getId() { return ID; }
 

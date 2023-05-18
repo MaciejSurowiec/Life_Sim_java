@@ -56,7 +56,7 @@ public abstract class Animal extends Organism {
     public abstract void makeChild(Vector pos);
 
     public int collision(Organism temp) {
-        if (temp.SameSpecies(avatar)) {
+        if (temp.SameSpecies(AVATAR)) {
             if (!toYoung && !temp.isToYoung()) {
                 world.commentator.birth(this);
                 breeding();

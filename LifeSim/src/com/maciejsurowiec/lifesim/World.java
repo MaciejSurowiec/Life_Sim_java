@@ -15,10 +15,7 @@ public class World implements ActionListener {
 
     private final String NEWLINE ="\n";
     private final int MAX_INITIATIVE = 8;
-    protected final int RECT_WIDTH = 20;
-    protected final int RECT_HEIGHT = RECT_WIDTH;
-    protected final int RECT_X = RECT_WIDTH / 2;
-    protected final int RECT_Y = RECT_X;
+    public static final int RECT_SIZE = 20;
 
     protected JTextField textField, textField1;
     protected JTextArea textArea;
@@ -29,6 +26,7 @@ public class World implements ActionListener {
     private ArrayList<Organism>[] organisms;
     private Vector size;
     public Commentator commentator = new Commentator();
+    public Legend legend = new Legend();
     private Human human;
     private boolean isAlive;
     private int spawningRate;
@@ -61,9 +59,10 @@ public class World implements ActionListener {
         turns = 0;
         listener = new World.Listener();
         window = new Window();
-        commentator.setVisible(true);
         createWorld();
         window.draw();
+        commentator.setVisible(true);
+        legend.setVisible(true);
         hasMoved = false;
     }
 
@@ -197,6 +196,7 @@ public class World implements ActionListener {
                 listener = new World.Listener();
                 window = new Window();
                 commentator.setVisible(true);
+                legend.setVisible(true);
                 window.draw();
                 hasMoved = false;
             } else {
@@ -282,6 +282,7 @@ public class World implements ActionListener {
                     size = new Vector(a,b);
                     frame.dispose();
                     commentator.setVisible(false);
+                    legend.setVisible(false);
                     commentator.clear();
                     initialization();
                 }
@@ -294,6 +295,7 @@ public class World implements ActionListener {
         else if(window != null) {
             if (e.getSource() == window.button2) commentator.setVisible(true);
             else if (e.getSource() == window.button3) save();
+            else if (e.getSource() == window.button4) legend.setVisible(true);
         }
     }
 
@@ -341,7 +343,7 @@ public class World implements ActionListener {
     public class Window extends JPanel {
         protected Window mainPanel;
         protected JFrame frame;
-        protected JButton button2, button3;
+        protected JButton button2, button3, button4;
 
         public void draw() {
             SwingUtilities.invokeLater(this::createAndShowGui);
@@ -356,20 +358,26 @@ public class World implements ActionListener {
                 for (int j = 0; j < size.x; j++) {
                     Graphics2D g2 = (Graphics2D)g;
                     g2.setColor(Color.BLACK);
-                    g2.drawRect(RECT_X + RECT_WIDTH * j, 50 + RECT_Y + RECT_HEIGHT * i, RECT_WIDTH, RECT_HEIGHT);
+                    g2.drawRect(RECT_SIZE * (j + 1),
+                            RECT_SIZE * (i + 1) + 50,
+                            RECT_SIZE,
+                            RECT_SIZE);
 
                     if (map[j][i] != null) {
-                        g2.setColor(map[j][i].avatar);
+                        g2.setColor(map[j][i].getAvatar());
                     } else {
                         g2.setColor(Color.BLACK);
                     }
-                    g2.fillRect(RECT_X+RECT_WIDTH * j,50 + RECT_Y+RECT_HEIGHT * i, RECT_WIDTH, RECT_HEIGHT);
+                    g2.fillRect( RECT_SIZE * (j + 1),
+                             RECT_SIZE * (i + 1) + 50,
+                            RECT_SIZE,
+                            RECT_SIZE);
                 }
             }
         }
 
         public Dimension getPreferredSize() {
-            return new Dimension(RECT_WIDTH * (size.x + 1), RECT_WIDTH * (size.y + 1) + 50);
+            return new Dimension(RECT_SIZE * (size.x + 2), RECT_SIZE * (size.y + 2) + 50);
         }
 
         public void redraw() {
@@ -378,7 +386,7 @@ public class World implements ActionListener {
 
         private  void createAndShowGui() {
             int width = 100;
-            int height = 30;
+            int height = 50;
             mainPanel = new Window();
             frame = new JFrame("LifeSim");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -389,16 +397,20 @@ public class World implements ActionListener {
             frame.setVisible(true);
             button2 = new JButton("Commentator");
             button3 = new JButton("Save");
+            button4 = new JButton("Legend");
             button2.addActionListener(World.this);
             button3.addActionListener(World.this);
+            button4.addActionListener(World.this);
             button2.setBounds(0,0, width,height * 2);
             button3.setBounds(100,0, width,height * 2);
+            button4.setBounds(150,0, width,height * 2);
             mainPanel.add(button2);
             mainPanel.add(button3);
+            mainPanel.add(button4);
             frame.addKeyListener(listener);
-            World.this.frame.setLayout(null);
             button2.setFocusable(false);
             button3.setFocusable(false);
+            button4.setFocusable(false);
             frame.setResizable(false);
         }
     }

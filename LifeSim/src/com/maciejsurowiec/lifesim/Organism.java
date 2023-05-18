@@ -6,14 +6,13 @@ import com.maciejsurowiec.lifesim.animals.*;
 import com.maciejsurowiec.lifesim.plants.*;
 
 public abstract class Organism {
-
     protected final int BIRTH = 0;
     protected final int DEATH = 1;
     protected final int VICTORY = 2;
 
     protected static final String NAME = "org";
     protected int strength;
-    protected Color avatar;
+    public static final Color AVATAR = Color.BLACK;
     protected int initiative;
     protected World world;
     protected boolean toYoung;
@@ -42,10 +41,12 @@ public abstract class Organism {
     }
 
     public boolean SameSpecies(Color temp) {
-        return temp == avatar;
+        return temp == getAvatar();
     }
 
     public int getInitiative() { return initiative; }
+
+    public abstract Color getAvatar();
 
     public void remove() { world.deleteFromList(this); }
 

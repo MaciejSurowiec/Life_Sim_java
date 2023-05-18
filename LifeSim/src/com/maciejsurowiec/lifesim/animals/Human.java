@@ -7,7 +7,6 @@ import com.maciejsurowiec.lifesim.World;
 
 import java.awt.*;
 
-
 public class Human extends Animal {
     private int power;
     private int move;
@@ -15,6 +14,7 @@ public class Human extends Animal {
     private final int POWER_LENGTH = 5;
     public static final String NAME = "a Human";
     public static final int ID = 4;
+    public static final Color AVATAR = new Color(6, 36, 127);
 
     public Human(Vector pos, World world) {
         strength = 5;
@@ -24,7 +24,6 @@ public class Human extends Animal {
         position = pos;
         power = 0;
         move = 0;
-        avatar = new Color(6, 36, 127);
         life = true;
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
@@ -42,6 +41,8 @@ public class Human extends Animal {
     public void makeChild(Vector pos) { Human human = new Human(pos, world); }
 
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public int getId() { return ID; }
 

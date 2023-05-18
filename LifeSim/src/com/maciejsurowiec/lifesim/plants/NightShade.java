@@ -7,22 +7,23 @@ import com.maciejsurowiec.lifesim.World;
 import java.awt.Color;
 
 public class NightShade extends Plant {
-
     public static final String NAME = "a NightShade";
     public static final int ID = 11;
+    public static final Color AVATAR = new Color(255,51,51);
 
     public NightShade(Vector vec, World world) {
         this.world = world;
         position = vec;
         initiative = 0;
         strength = 99;
-        avatar = new Color(255,51,51);
         toYoung = true;
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
     }
 
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public int getId() { return ID; }
 

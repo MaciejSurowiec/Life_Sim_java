@@ -8,11 +8,11 @@ import com.maciejsurowiec.lifesim.World;
 import java.awt.Color;
 
 public class Turtle extends Animal {
-
     public static final String NAME = "a Turtle";
     public static final int ID = 6;
     private final int CHANCE_TO_MOVE = 75;
     protected final int KILLING_STRENGTH = 5;
+    public static final Color AVATAR = new Color(51,102,0);
 
     public Turtle(Vector pos, World world) {
         strength = 2;
@@ -20,13 +20,14 @@ public class Turtle extends Animal {
         toYoung = true;
         this.world = world;
         position = pos;
-        avatar = new Color(51,102,0);
-
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
     }
 
+
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public int getId() { return ID; }
 
@@ -42,7 +43,7 @@ public class Turtle extends Animal {
     }
 
     public int collision(Organism temp) {
-        if (temp.SameSpecies(avatar)) {
+        if (temp.SameSpecies(AVATAR)) {
             if (!toYoung && !temp.isToYoung()) {
                 world.commentator.birth(this);
                 breeding();

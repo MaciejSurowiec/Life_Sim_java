@@ -5,10 +5,11 @@ import com.maciejsurowiec.lifesim.Vector;
 import com.maciejsurowiec.lifesim.World;
 
 import java.awt.Color;
-public class CyberSheep extends Animal {
 
+public class CyberSheep extends Animal {
     public static final String NAME = "a Cyber Sheep";
     public static final int ID = 2;
+    public static final Color AVATAR = new Color(192,192,192);
 
     public CyberSheep(Vector pos, World world) {
         strength = 11;
@@ -16,7 +17,6 @@ public class CyberSheep extends Animal {
         toYoung = true;
         this.world = world;
         position = pos;
-        avatar = new Color(192,192,192);
         this.world.setMapElement(position, this);
         this.world.pushToWorld(this);
     }
@@ -29,6 +29,8 @@ public class CyberSheep extends Animal {
     }
 
     public String speak() { return NAME; }
+
+    public Color getAvatar() { return AVATAR; }
 
     public int getId() { return ID; }
 
